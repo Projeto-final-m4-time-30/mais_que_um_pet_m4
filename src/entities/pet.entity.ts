@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, ManyToMany, ManyToOne } from 'typeorm'
 import { Info_pet } from './info_pet.entity'
+import { User } from './user.entity'
 
 
 @Entity()
@@ -26,6 +27,7 @@ export class Pet {
     @JoinColumn()
     info_pet: Info_pet
 
-    @Column()
-    donor_id: string
+    @ManyToOne(() => User, user => user.pets)
+    donor_id: User
+
 }
