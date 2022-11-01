@@ -6,13 +6,13 @@ export class Address {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string
 
-    @Column({ length: 8 })
+    @Column({ length: 8})
     cep: string
 
     @Column()
     city: string
 
-    @Column()
+    @Column({length: 2})
     state: string
 
     @Column()
