@@ -25,7 +25,7 @@ export const createUserService = async ({
   });
 
   if (emailAlreadyExists) {
-    throw new AppError(400, "Email already exists");
+    throw new AppError("Email already exists");
   }
 
   const newAddress = new Address();
