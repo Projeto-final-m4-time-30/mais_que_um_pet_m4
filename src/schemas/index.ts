@@ -2,7 +2,8 @@ import * as yup from "yup";
 import { SchemaOf } from "yup";
 
 import bcrypt from "bcrypt";
-import { IUser } from "../interfaces";
+import { IUser } from "../interfaces/user";
+
 
 export const userCreateScheama: SchemaOf<IUser> = yup.object().shape({
   user_name: yup.string().required(),

@@ -2,8 +2,9 @@ import AppDataSource from "../../database/data-source";
 import { User } from "../../entities/user.entity";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { IUserLogin } from "../../interfaces";
+
 import { AppError } from "../../errors/appError";
+import { IUserLogin } from "../../interfaces/user";
 
 export async function loginUserService({ email, password }: IUserLogin) {
   if (!email || !password) {
