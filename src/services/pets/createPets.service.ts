@@ -18,7 +18,7 @@ export const createPetService = async ({
    })
 
    if(petAlreadyExists){
-    throw new AppError(400, "This pet is already registered")
+    throw new AppError("This pet is already registered", 400)
    }
 
    const newInfo_Pet = new Info_pet()

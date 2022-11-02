@@ -1,6 +1,4 @@
 import { Response, Request, NextFunction } from "express";
-import AppDataSource from "../database/data-source";
-import { User } from "../entities/user.entity";
 import jwt from "jsonwebtoken";
 import { AppError } from "../errors/appError";
 
@@ -9,36 +7,30 @@ const verifyUserAuthenticationMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const authorization = req.headers.authorization;
 
-  if (!authorization) {
+  let authorization = req.headers.authorization
+
+  if(!authorization){
     throw new AppError("missing authorization token.");
   }
 
-  const database = AppDataSource.getRepository(User);
-
-  const users = await database.find();
-
   const token = authorization.split(" ")[1];
-
-  const payload: any = jwt.verify(
-    token,
-    String(process.env.JWT_SECRET),
-    (err, decoded) => {
-      if (!decoded) {
-        return res.status(401).json({ message: "User invalid." });
+  
+  token.split(" ")[1]
+  jwt.verify(token, process.env.SECRET_KEY as string, (error, decoded: any) =>{
+      if(error){
+          return res.status(403).json({
+              message: 'Invalid token'
+          })
       }
-      return decoded;
-    }
-  );
-
-  const exists = users.find((user) => user.email === payload.email);
-
-  if (!exists) {
-    return res.status(404).json({ message: "User invalid." });
-  }
-
-  return next();
+      if(decoded){
+          req.body.user = {
+             isActive: decoded.isActive,
+             id: decoded.sub
+          }
+      }
+      return next()
+  })
 };
 
 export default verifyUserAuthenticationMiddleware;

@@ -15,14 +15,13 @@ const deleteUserService = async (id: string) => {
   }
 
   if (user.is_active === false) {
-    return { status: 400, message: "User not found." };
+    throw new AppError("User not found.", 400)
+
   }
 
   await database.update(id, {
     is_active: false,
   });
-
-  //   await database.softDelete(id);
 
   return { message: "User deleted." };
 };
