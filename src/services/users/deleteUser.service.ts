@@ -15,7 +15,7 @@ const deleteUserService = async (id: string) => {
   }
 
   if (user.is_active === false) {
-    throw new AppError("User not found.", 400)
+    throw new AppError("User not found.", 401)
 
   }
 
@@ -23,6 +23,6 @@ const deleteUserService = async (id: string) => {
     is_active: false,
   });
 
-  return { message: "User deleted." };
+  return { status: 204, message: "User deleted." };
 };
 export default deleteUserService;
