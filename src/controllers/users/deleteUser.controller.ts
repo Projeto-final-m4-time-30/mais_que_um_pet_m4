@@ -8,7 +8,7 @@ const userDeleteController = async (req: Request, res: Response) => {
 
     const deleted = await deleteUserService(id);
 
-    if (deleted.status === 400) {
+    if (deleted.statusCode === 400) {
       return res.status(400).json({ message: deleted.message });
     }
 

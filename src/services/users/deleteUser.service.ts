@@ -23,6 +23,6 @@ const deleteUserService = async (id: string) => {
     is_active: false,
   });
 
-  return { status: 204, message: "User deleted." };
+  return { statusCode: 204, message: "User deleted." };
 };
 export default deleteUserService;
