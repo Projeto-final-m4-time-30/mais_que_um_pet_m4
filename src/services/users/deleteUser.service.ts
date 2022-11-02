@@ -1,9 +1,9 @@
-import AppDataSource from "../database/data-source";
-import { User } from "../entities/user.entity";
-import { AppError } from "../errors/appError";
+import AppDataSource from "../../database/data-source";
+import { User } from "../../entities/user.entity";
+import { AppError } from "../../errors/appError";
 ("../errors/appError");
 
-const userDeleteService = async (id: string) => {
+const deleteUserService = async (id: string) => {
   const database = AppDataSource.getRepository(User);
 
   const users = await database.find();
@@ -26,4 +26,4 @@ const userDeleteService = async (id: string) => {
 
   return { message: "User deleted." };
 };
-export default userDeleteService;
+export default deleteUserService;

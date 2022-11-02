@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { AppError } from "../errors/appError";
-import userDeleteService from "../services/userDelete.service";
+import { AppError } from "../../errors/appError";
+import deleteUserService from "../../services/users/deleteUser.service";
 
 const userDeleteController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
-    const deleted = await userDeleteService(id);
+    const deleted = await deleteUserService(id);
 
     if (deleted.status === 400) {
       return res.status(400).json({ message: deleted.message });
