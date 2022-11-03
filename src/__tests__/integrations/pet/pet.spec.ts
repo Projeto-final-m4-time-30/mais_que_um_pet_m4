@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import AppDataSource from "../../../database/data-source";
 import request from "supertest";
 import app from "../../../app";
-import { createPet, pets } from "../../mocks";
+import { createPet } from "../../mocks";
 import { IPetRequest } from "../../../interfaces/pet";
 
 
