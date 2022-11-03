@@ -11,11 +11,11 @@ export const petRoutes = () => {
   routes.post("/pet", createPetsController);
   routes.get("/pet", readAllPetsController);
   routes.get("/pet/adoptable", readAdoptablePetsController);
-  // routes.patch(
-  //   "/pet/adopt/:id",
-  //   verifyUserAuthenticationMiddleware,
-  //   adoptPetController
-  // );
+  routes.patch(
+    "/pet/adopt/:id",
+    verifyUserAuthenticationMiddleware,
+    adoptPetController
+  );
 
   return routes;
 };

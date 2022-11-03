@@ -5,7 +5,6 @@ import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 import { IUser, IUserNoPassword } from "../../interfaces/user";
 
-
 export const createUserService = async ({
   user_name,
   user_image,
@@ -56,6 +55,7 @@ export const createUserService = async ({
   user.user_name = user_name;
   user.address = newAddress;
   user.contact = newContact;
+  user.pets = [];
 
   userRepository.create(user);
   await userRepository.save(user);
