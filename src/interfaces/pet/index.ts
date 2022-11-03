@@ -2,8 +2,8 @@ export interface IPet {
     name: string
     is_adoptable: boolean
     is_active: boolean
-    created_at: string
-    updated_at: string
+    created_at: Date
+    updated_at: Date
     info_pet: IInfoPet
 }
 
@@ -15,3 +15,15 @@ export interface IInfoPet {
     description: string
     vaccine: string
 }
+
+export interface IUpdatePet{
+  name? :string
+  size? :string;
+  pet_image? : string;
+  color? :string;
+  especie ?: string;
+  descripition? :string;
+  vaccine?:string;
+  species?:string;
+}
+
