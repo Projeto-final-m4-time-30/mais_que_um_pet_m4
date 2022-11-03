@@ -3,7 +3,8 @@ import { Address } from "../../entities/address.entity";
 import { Contact } from "../../entities/contact.entity";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
-import { IUser, IUserNoPassword } from "../../interfaces";
+import { IUser, IUserNoPassword } from "../../interfaces/user";
+
 
 export const createUserService = async ({
   user_name,
@@ -25,7 +26,7 @@ export const createUserService = async ({
   });
 
   if (emailAlreadyExists) {
-    throw new AppError(400, "Email already exists");
+    throw new AppError("Email already exists");
   }
 
   const newAddress = new Address();
