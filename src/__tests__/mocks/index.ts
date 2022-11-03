@@ -2,10 +2,7 @@ import { IPet, IPetRequest } from "../../interfaces/pet"
 import { IUser, IUserNoPassword } from "../../interfaces/user"
 
 const users: Array<IUser> = []
-const pets: Array<IPetRequest> = []
-
-
-
+const pets: Array<IPet> = []
 
 const user: IUser= {
     user_name: "Test",

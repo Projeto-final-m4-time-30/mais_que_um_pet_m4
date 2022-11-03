@@ -3,7 +3,6 @@ import AppDataSource from "../../../database/data-source";
 import request from "supertest";
 import app from "../../../app";
 import { createPet, pets, user, userSession } from "../../mocks";
-import { IPetRequest } from "../../../interfaces/pet";
 
 
 describe('/pet', () => {
