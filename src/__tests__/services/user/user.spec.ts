@@ -45,9 +45,7 @@ describe('/users', () => {
         const response = await request(app).post('/users').send(userNoPassword)
 
         expect(response.status).toBe(400)
-        expect(response.body).toMatchObject({
-            message: 'Password is missing'
-        })
+        expect(response.body).toMatchObject({error: "password is a required field"})
              
     })
 
