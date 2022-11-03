@@ -1,7 +1,6 @@
 import { IUser, IUserNoPassword } from "../../../interfaces/user"
 
-const users: Array<IUser> = []
-
+const users: Array<any> = []
 
 
 const user: IUser= {
@@ -47,4 +46,13 @@ const userSession = {
     email: "test@kenzie.com",
     password: "1234"
 }
-export {  user, userNoPassword, userSession, users }
+
+const userSessionErro = {
+    email: "testERRO@kenzie.com",
+    password: "1234"
+}
+
+const userInvalid = {
+}
+
+export {  user, userNoPassword, userSession, users, userSessionErro, userInvalid }

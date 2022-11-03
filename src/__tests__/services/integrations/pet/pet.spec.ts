@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
-import AppDataSource from "../../../database/data-source";
+import AppDataSource from "../../../../database/data-source";
 import request from "supertest";
-import app from "../../../app";
+import app from "../../../../app";
 
 describe('/pet', () => {
     let connection: DataSource
