@@ -1,6 +1,9 @@
-import { IUser, IUserNoPassword } from "../../../interfaces/user"
+import { IPet, IPetRequest } from "../../interfaces/pet"
+import { IUser, IUserNoPassword } from "../../interfaces/user"
 
 const users: Array<IUser> = []
+const pets: Array<IPetRequest> = []
+
 
 
 
@@ -47,4 +50,18 @@ const userSession = {
     email: "test@kenzie.com",
     password: "1234"
 }
-export {  user, userNoPassword, userSession, users }
+
+const createPet: IPetRequest = {
+    name: "Viola",
+    is_adoptable: true,
+    is_active: true,
+    info_pet: {
+        pet_image: "",
+        size: "médio porte",
+        color: "Caramelo universal",
+        species: "Vira-Lata",
+        description: "Cadelinha de 7 anos muito tranquila e parceira",
+        vaccine: "todas"
+    }
+}
+export {  user, userNoPassword, userSession, users, createPet, pets }

@@ -16,6 +16,14 @@ export interface IInfoPet {
     vaccine: string
 }
 
+
+export interface IPetRequest {
+    name: string
+    is_adoptable: boolean
+    is_active: boolean
+    info_pet: IInfoPet
+}
+
 export interface IUpdatePet{
   name? :string
   size? :string;
@@ -26,4 +34,3 @@ export interface IUpdatePet{
   vaccine?:string;
   species?:string;
 }
-

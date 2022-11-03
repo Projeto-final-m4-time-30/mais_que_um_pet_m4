@@ -2,7 +2,7 @@ import { DataSource } from "typeorm"
 import AppDataSource from "../../../database/data-source"
 import app from '../../../app'
 import request from 'supertest'
-import { user, userNoPassword, users, userSession } from "../mocks"
+import { user, userNoPassword, users, userSession } from "../../mocks"
 
 
 describe('/users', () => {
