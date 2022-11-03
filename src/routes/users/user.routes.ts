@@ -23,7 +23,7 @@ export const userRoutes = () => {
   );
 
   routes.post("/login", loginUserController);
-  routes.get("/users", verifyUserAuthenticationMiddleware, userListController);
+  routes.get("/users", userListController);
   routes.delete(
     "/users/:id",
     verifyUserAuthenticationMiddleware,
