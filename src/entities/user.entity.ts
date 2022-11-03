@@ -17,7 +17,7 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToMany(() => Pet, (pet) => pet.id)
+  @OneToMany(() => Pet, (pet) => pet.user)
   pets: Pet[];
 
   @Column({ nullable: true })

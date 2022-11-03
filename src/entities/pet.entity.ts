@@ -26,19 +26,17 @@ export class Pet {
   @Column()
   is_active: boolean;
 
-  @Column()
-  registerUser_id: string;
 
   @CreateDateColumn()
-  created_at: string;
+  created_at: Date
 
   @UpdateDateColumn()
-  updated_at: string;
+  updated_at: Date
 
   @OneToOne(() => Info_pet, { eager: true })
   @JoinColumn()
   info_pet: Info_pet;
 
-  @ManyToOne(() => User, (user) => user.id)
-  ownerId: User;
+  @ManyToOne(() => User, (user) => user.pets)
+  user: User;
 }
