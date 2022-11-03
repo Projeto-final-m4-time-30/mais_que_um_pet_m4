@@ -15,3 +15,10 @@ export interface IInfoPet {
     description: string
     vaccine: string
 }
+
+export interface IPetRequest {
+    name: string
+    is_adoptable: boolean
+    is_active: boolean
+    info_pet: IInfoPet
+}
