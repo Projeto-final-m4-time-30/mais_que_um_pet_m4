@@ -2,10 +2,6 @@ import { IPet, IPetRequest } from "../../interfaces/pet"
 import { IUser, IUserNoPassword } from "../../interfaces/user"
 
 const users: Array<IUser> = []
-const pets: Array<IPetRequest> = []
-
-
-
 
 const user: IUser= {
     user_name: "Test",
@@ -64,4 +60,4 @@ const createPet: IPetRequest = {
         vaccine: "todas"
     }
 }
-export {  user, userNoPassword, userSession, users, createPet, pets }
+export {  user, userNoPassword, userSession, users, createPet }
