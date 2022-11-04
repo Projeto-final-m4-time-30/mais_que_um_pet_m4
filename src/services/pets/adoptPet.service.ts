@@ -11,14 +11,16 @@ const adoptPetService = async (userToken: string, petId: string) => {
 
   const pets = await petDatabase.find();
 
-  // console.log("--------------------------", pets);
-
   const petExist = pets.find((pet) => {
     return pet.id === petId;
   });
 
   if (!petExist) {
     throw new AppError("Pet not found.");
+  }
+
+  if (!petExist.is_adoptable || !petExist.is_active) {
+    throw new AppError("Can't adopt this pet.");
   }
 
   const userData: any = tokenDecoder(userToken);
@@ -29,21 +31,18 @@ const adoptPetService = async (userToken: string, petId: string) => {
     throw new AppError("User not found.");
   }
 
-  console.log("-------------------userdata------", user.pets);
-
-  // await petDatabase.update(petId, {
-  //   is_adoptable: false,
-  //   donor_id: user,
-  // });
-
-  // const newPets = [...userData.user.pets];
-
-  await userDatabase.update(user.id, {
-    pets: [...pets, petExist],
+  await petDatabase.update(petId, {
+    is_adoptable: false,
+    user: user,
   });
 
   const newUser = await userDatabase.findOneBy({ id: userData.id });
+  const newPet = await petDatabase.findOneBy({ id: petExist.id });
 
-  return { message: "Pet Adopted", newUser };
+  return {
+    message: "Pet Adopted",
+    user: newUser!.user_name,
+    pet: { name: newPet!.name, is_adoptable: newPet!.is_adoptable },
+  };
 };
 export default adoptPetService;

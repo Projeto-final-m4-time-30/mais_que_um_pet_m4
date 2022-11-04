@@ -9,7 +9,7 @@ const adoptPetController = async (req: Request, res: Response) => {
   }
 
   const petId = req.params.id;
-  console.log("------------------------", petId);
+  // console.log("------------------------", petId);
   const adopt = await adoptPetService(userToken, petId);
 
   return res.status(200).json(adopt);

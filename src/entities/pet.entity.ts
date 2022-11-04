@@ -36,6 +36,7 @@ export class Pet {
   @JoinColumn()
   info_pet: Info_pet;
 
-  @ManyToOne(() => User, (user) => user.pets)
+  @ManyToOne(() => User, (user) => user.id)
+  @JoinColumn()
   user: User;
 }
