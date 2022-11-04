@@ -1,10 +1,11 @@
-import { IUser, IUserNoPassword } from "../../../interfaces/user"
-
-const users: Array<IUser> = []
-
+import { IPet, IPetRequest } from "../../interfaces/pet"
+import { IUser, IUserNoPassword } from "../../interfaces/user"
 
 
-const user: IUser= {
+const users: Array<any> = []
+const pets: Array<IPet> = []
+
+const user: IUser = {
     user_name: "Test",
     user_image: "https://static4.depositphotos.com/1011434/493/i/600/depositphotos_4939645-stock-photo-cute-puppy.jpg",
     email: "test@kenzie.com",
@@ -24,7 +25,7 @@ const user: IUser= {
     }
 }
 
-const userNoPassword: IUserNoPassword= {
+const userNoPassword: IUserNoPassword = {
     user_name: "Test",
     user_image: "https://static4.depositphotos.com/1011434/493/i/600/depositphotos_4939645-stock-photo-cute-puppy.jpg",
     email: "test@kenzie.com",
@@ -47,4 +48,27 @@ const userSession = {
     email: "test@kenzie.com",
     password: "1234"
 }
-export {  user, userNoPassword, userSession, users }
+
+const userSessionErro = {
+    email: "testERRO@kenzie.com",
+    password: "1234"
+}
+
+const userInvalid = {
+}
+
+const createPet: IPetRequest = {
+    name: "Viola",
+    is_adoptable: true,
+    is_active: true,
+    info_pet: {
+        pet_image: "",
+        size: "médio porte",
+        color: "Caramelo universal",
+        species: "Vira-Lata",
+        description: "Cadelinha de 7 anos muito tranquila e parceira",
+        vaccine: "todas"
+    }
+}
+export { user, userNoPassword, userSession, users, userSessionErro, userInvalid, createPet, pets }
+
