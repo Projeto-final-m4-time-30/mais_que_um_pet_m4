@@ -1,8 +1,4 @@
 {
-  "engines": {
-    "node": "16.16.0",
-    "npm": "8.14.0"
-  },
   "name": "mais_que_um_pet_m4",
   "version": "1.0.0",
   "main": "index.js",
