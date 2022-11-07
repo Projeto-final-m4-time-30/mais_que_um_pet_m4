@@ -39,12 +39,50 @@
     - [Corpo da Requisição:](#corpo-da-requisição-3)
     - [Exemplo de Response:](#exemplo-de-response-3)
     - [Possíveis Erros:](#possíveis-erros-3)
-    - [1.4. **SoftDelete do usuário**](#14-softdelete-do-usuário)
+    - [1.5. **SoftDelete do usuário**](#15-softdelete-do-usuário)
     - [`/users`](#users-3)
     - [Exemplo de Request:](#exemplo-de-request-4)
     - [Corpo da Requisição:](#corpo-da-requisição-4)
     - [Exemplo de Response:](#exemplo-de-response-4)
     - [Possíveis Erros:](#possíveis-erros-4)
+  - [2. **Pets**](#2-pets)
+    - [Endpoints](#endpoints-1)
+    - [2.1. **Criação de um pet**](#21-criação-de-um-pet)
+    - [`/pet`](#pet)
+    - [Exemplo de Request:](#exemplo-de-request-5)
+    - [Corpo da Requisição:](#corpo-da-requisição-5)
+    - [Exemplo de Response:](#exemplo-de-response-5)
+    - [Possíveis Erros:](#possíveis-erros-5)
+    - [2.2. **Listar todos os pets**](#22-listar-todos-os-pets)
+    - [`/pet`](#pet-1)
+    - [Exemplo de Request:](#exemplo-de-request-6)
+    - [Corpo da Requisição:](#corpo-da-requisição-6)
+    - [Exemplo de Response:](#exemplo-de-response-6)
+    - [Possíveis Erros:](#possíveis-erros-6)
+    - [2.3. **Lista os pets disponíveis para adoção**](#23-lista-os-pets-disponíveis-para-adoção)
+    - [`/pet`](#pet-2)
+    - [Exemplo de Request:](#exemplo-de-request-7)
+    - [Corpo da Requisição:](#corpo-da-requisição-7)
+    - [Exemplo de Response:](#exemplo-de-response-7)
+    - [Possíveis Erros:](#possíveis-erros-7)
+    - [2.4. **Adotar um pet**](#24-adotar-um-pet)
+    - [`/pet`](#pet-3)
+    - [Exemplo de Request:](#exemplo-de-request-8)
+    - [Corpo da Requisição:](#corpo-da-requisição-8)
+    - [Exemplo de Response:](#exemplo-de-response-8)
+    - [Possíveis Erros:](#possíveis-erros-8)
+    - [2.5. **Atualizar dados do pet**](#25-atualizar-dados-do-pet)
+    - [`/pet`](#pet-4)
+    - [Exemplo de Request:](#exemplo-de-request-9)
+    - [Corpo da Requisição:](#corpo-da-requisição-9)
+    - [Exemplo de Response:](#exemplo-de-response-9)
+    - [Possíveis Erros:](#possíveis-erros-9)
+    - [2.6. **SoftDelete do pet**](#26-softdelete-do-pet)
+    - [`/pet`](#pet-5)
+    - [Exemplo de Request:](#exemplo-de-request-10)
+    - [Corpo da Requisição:](#corpo-da-requisição-10)
+    - [Exemplo de Response:](#exemplo-de-response-10)
+    - [Possíveis Erros:](#possíveis-erros-10)
 
 ---
 
@@ -124,8 +162,10 @@ Authorization: Bearer token
 
 - [Users](#1-users)
   - [POST - /users](#11-criação-de-usuário)
-  - [GET - /users](#12-listando-usuários)
-  - [GET - /users/:user_id](#13-listar-usuário-por-id)
+  - [POST - /login](#12-login-do-usuário)
+  - [GET - /users](#13-listar-usuários)
+  - [PATCH - /users/:id](#13-atualiza-dados-do-usuário)
+  - [DELETE - /users:id](#13-softdelete-do-usuário)
 - [Pets](#2-pets)
   - [POST - /pets](#21-criação-de-pet)
   - [GET - /pets](#22-listando-pets)
@@ -332,10 +372,10 @@ Content-type: application/json
 
 ### Possíveis Erros:
 
-| Código do Erro    | Descrição                   |
-| ----------------- | --------------------------- |
-| 400 Bad request   | email/password is required. |
-| 403 Bad forbidden | Wrong email/password.       |
+| Código do Erro  | Descrição                   |
+| --------------- | --------------------------- |
+| 400 Bad request | email/password is required. |
+| 403 forbidden   | Wrong email/password.       |
 
 ---
 
@@ -411,7 +451,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 ### `/users`
 
 ```
-Só pode ser atualizado o user_name, user_image, email e password.
+Pode ser atualizado o user_name, user_image, email e password.
 ```
 
 ### Exemplo de Request:
@@ -486,7 +526,7 @@ Content-type: application/json
 
 ---
 
-### 1.4. **SoftDelete do usuário**
+### 1.5. **SoftDelete do usuário**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -521,11 +561,396 @@ Vazio
 
 ### Possíveis Erros:
 
-| Código do Erro    | Descrição                     |
-| ----------------- | ----------------------------- |
-| 400 Bad request   | missing authorization token.. |
-| 403 Bad forbidden | Invalid token.                |
-| 400 not found     | User not found.               |
-| 401 unauthorized  | User is not active.           |
+| Código do Erro   | Descrição                     |
+| ---------------- | ----------------------------- |
+| 400 Bad request  | missing authorization token.. |
+| 403 forbidden    | Invalid token.                |
+| 404 not found    | User not found.               |
+| 401 unauthorized | User is not active.           |
+
+---
+
+## 2. **Pets**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+O objeto User é definido como:
+
+| Campo         | Tipo     | Descrição                               |
+| ------------- | -------- | --------------------------------------- |
+| id            | string   | Identificador único do usuário          |
+| name          | string   | O nome do pet.                          |
+| is_adoptable  | boolean  | Informa se o pet pode ser adotado       |
+| is_active     | Boolean  | Softdelete do pet                       |
+| created_at    | date     | Data de cadastro do pet                 |
+| updated_at    | date     | Data de atualização do pet              |
+| info_pet      | Info_pet | Objeto Info_pet, informações do pet     |
+| user          | User     | Objeto User, define usuário dono do pet |
+| user_register | string   | id do usuário doador do pet             |
+
+### Endpoints
+
+| Método | Rota           | Descrição                             |
+| ------ | -------------- | ------------------------------------- |
+| POST   | /pet           | Criação de um pet                     |
+| GET    | /pet           | Lista todos os pets                   |
+| GET    | /pet/adoptable | Lista os pets disponíveis para adoção |
+| PATCH  | /pet/adopt/:id | Adotar um pet                         |
+| PATCH  | /pet/:id       | Atualiza dados do pet                 |
+| DELETE | /pet/:id       | SoftDelete do pet                     |
+
+---
+
+### 2.1. **Criação de um pet**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/pet`
+
+### Exemplo de Request:
+
+```
+POST /pet
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: Bearer token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "name": "Viola",
+  "is_adoptable": true,
+  "is_active": true,
+  "info_pet": {
+    "pet_image": "",
+    "size": "médio porte",
+    "color": "Caramelo universal",
+    "species": "Vira-Lata",
+    "description": "Cadelinha de 7 anos muito tranquila e parceira",
+    "vaccine": "todas"
+  }
+}
+```
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+  "name": "Viola2",
+  "is_adoptable": true,
+  "is_active": true,
+  "info_pet": {
+    "pet_image": "viola2",
+    "size": "médio porte",
+    "color": "Caramelo universal",
+    "species": "Vira-Lata",
+    "description": "Cadelinha de 7 anos muito tranquila e parceira",
+    "vaccine": "todas",
+    "id": "20d65cdd-6101-4949-8d4c-c52fadd87fe9"
+  },
+  "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
+  "id": "76e1e904-de35-428d-95b4-eb63bf014b24",
+  "created_at": "2022-11-07T19:20:48.930Z",
+  "updated_at": "2022-11-07T19:20:48.930Z"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                       |
+| --------------- | ------------------------------- |
+| 400 Bad request | missing authorization token.    |
+| 403 forbidden   | Invalid token.                  |
+| 400 Bad request | This pet is already registered. |
+
+---
+
+### 2.2. **Listar todos os pets**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/pet`
+
+### Exemplo de Request:
+
+```
+GET /pet
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 Ok
+```
+
+```json
+[
+  {
+    "id": "a36dadeb-7d9e-4d7a-8fd2-02d39f2d58ef",
+    "name": "Viola",
+    "is_adoptable": false,
+    "is_active": true,
+    "created_at": "2022-11-07T16:04:00.405Z",
+    "updated_at": "2022-11-07T16:13:08.903Z",
+    "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
+    "info_pet": {
+      "id": "45769796-fc6f-46d0-8470-b815707c7cbd",
+      "pet_image": "",
+      "size": "médio porte",
+      "color": "Caramelo universal",
+      "species": "Vira-Lata",
+      "description": "Cadelinha de 7 anos muito tranquila e parceira",
+      "vaccine": "todas"
+    }
+  }
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+### 2.3. **Lista os pets disponíveis para adoção**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/pet`
+
+### Exemplo de Request:
+
+```
+GET /pet/adoptable
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 Ok
+```
+
+```json
+[
+  {
+    "id": "76e1e904-de35-428d-95b4-eb63bf014b24",
+    "name": "Viola2",
+    "is_adoptable": true,
+    "is_active": true,
+    "created_at": "2022-11-07T19:20:48.930Z",
+    "updated_at": "2022-11-07T19:20:48.930Z",
+    "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
+    "info_pet": {
+      "id": "20d65cdd-6101-4949-8d4c-c52fadd87fe9",
+      "pet_image": "viola2",
+      "size": "médio porte",
+      "color": "Caramelo universal",
+      "species": "Vira-Lata",
+      "description": "Cadelinha de 7 anos muito tranquila e parceira",
+      "vaccine": "todas"
+    }
+  }
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+### 2.4. **Adotar um pet**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/pet`
+
+### Exemplo de Request:
+
+```
+PATCH /pet/adopt/:id
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: Bearer token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 Ok
+```
+
+```json
+{
+  "message": "Pet Adopted",
+  "user": "Makson",
+  "pet": {
+    "name": "Viola2",
+    "is_adoptable": false
+  }
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                    |
+| --------------- | ---------------------------- |
+| 400 Bad request | missing authorization token. |
+| 403 forbidden   | Invalid token.               |
+| 400 Bad request | Pet not found.               |
+| 400 Bad request | Can't adopt this pet.        |
+| 400 Bad request | You do not have permission   |
+| 400 Bad request | User not found.              |
+
+---
+
+### 2.5. **Atualizar dados do pet**
+
+[ Voltar para os Endpoints ](#5-endpoints)
+
+### `/pet`
+
+```
+Pode ser atualizado o name, size, pet_image, color, species, description e vaccine.
+Deve ser passado o id do info_pet no body da requisição.
+```
+
+### Exemplo de Request:
+
+```
+PATCH /pet/:id
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: Bearer token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "name": "novo_nome",
+  "size": "pequeno_porte",
+  "pet_image": "nova_url",
+  "color": "preto",
+  "species": "Pastor Alemão",
+  "description": "nova descrição",
+  "vaccine": "valmec",
+  "info_pet_id": "uuid info_pet"
+}
+```
+
+### Exemplo de Response:
+
+```
+200 Ok
+```
+
+```json
+{
+  "message": "upadated",
+  "upadated": {
+    "id": "d2b3984b-1e98-4d5b-9075-36e3c57f4c0a",
+    "name": "novo_nome",
+    "is_adoptable": true,
+    "is_active": true,
+    "created_at": "2022-11-07T19:58:33.299Z",
+    "updated_at": "2022-11-07T20:00:48.705Z",
+    "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
+    "info_pet": {
+      "id": "867d6d92-4a26-46d7-a922-9aad0be31c7f",
+      "pet_image": "nova_url",
+      "size": "pequeno_porte",
+      "color": "preto",
+      "species": "Pastor Alemão",
+      "description": "Cadelinha de 7 anos muito tranquila e parceira",
+      "vaccine": "valmec"
+    }
+  }
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                    |
+| --------------- | ---------------------------- |
+| 400 Bad request | missing authorization token. |
+| 403 forbidden   | Invalid token.               |
+| 404 not found   | Pet not find.                |
+| 404 not found   | infoPets not find            |
+
+---
+
+### 2.6. **SoftDelete do pet**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/pet`
+
+### Exemplo de Request:
+
+```
+
+DELETE /pet/:id
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: Bearer token
+Content-type: application/json
+
+```
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "pet Deleted"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                     |
+| --------------- | ----------------------------- |
+| 400 Bad request | missing authorization token.. |
+| 403 forbidden   | Invalid token.                |
+| 404 not found   | Pet not find.                 |
 
 ---
