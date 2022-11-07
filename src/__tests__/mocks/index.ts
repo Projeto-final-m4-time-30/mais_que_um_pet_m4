@@ -3,7 +3,7 @@ import { IUser, IUserNoPassword } from "../../interfaces/user"
 
 
 const users: Array<any> = []
-const pets: Array<IPet> = []
+const pets: Array<any> = []
 
 const user: IUser = {
     user_name: "Test",
