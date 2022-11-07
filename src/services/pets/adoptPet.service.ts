@@ -4,7 +4,11 @@ import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 import tokenDecoder from "../../utilities/tokenDecoder.utility";
 
-const adoptPetService = async (userToken: string, petId: string) => {
+const adoptPetService = async (
+  userToken: string,
+  petId: string,
+  userRegister: string
+) => {
   const userDatabase = AppDataSource.getRepository(User);
 
   const petDatabase = AppDataSource.getRepository(Pet);
@@ -21,6 +25,10 @@ const adoptPetService = async (userToken: string, petId: string) => {
 
   if (!petExist.is_adoptable || !petExist.is_active) {
     throw new AppError("Can't adopt this pet.");
+  }
+
+  if (!(petExist.user_register === userRegister)) {
+    throw new AppError("You do not have permission");
   }
 
   const userData: any = tokenDecoder(userToken);

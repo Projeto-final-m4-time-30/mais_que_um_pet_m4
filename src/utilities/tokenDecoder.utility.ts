@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { AppError } from "../errors/appError";
 
-function tokenDecoder(authorization: string) {
+function tokenDecoder(authorization: string): any {
   const token = authorization.split(" ")[1];
 
   token.split(" ")[1];

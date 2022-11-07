@@ -8,7 +8,7 @@ import verifyUserAuthenticationMiddleware from "../../middlewares/verifyUserAuth
 const routes = Router();
 
 export const petRoutes = () => {
-  routes.post("/pet", createPetsController);
+  routes.post("/pet", verifyUserAuthenticationMiddleware, createPetsController);
   routes.get("/pet", readAllPetsController);
   routes.get("/pet/adoptable", readAdoptablePetsController);
   routes.patch(
