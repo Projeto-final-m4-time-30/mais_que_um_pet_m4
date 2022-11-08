@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import adoptPetService from "../../services/pets/adoptPet.service";
+import tokenDecoder from "../../utilities/tokenDecoder.utility";
 
 const adoptPetController = async (req: Request, res: Response) => {
   const userToken = req.headers.authorization;
@@ -9,8 +10,8 @@ const adoptPetController = async (req: Request, res: Response) => {
   }
 
   const petId = req.params.id;
-  // console.log("------------------------", petId);
-  const adopt = await adoptPetService(userToken, petId);
+  const user_register = tokenDecoder(userToken).user.id;
+  const adopt = await adoptPetService(userToken, petId, user_register);
 
   return res.status(200).json(adopt);
 };

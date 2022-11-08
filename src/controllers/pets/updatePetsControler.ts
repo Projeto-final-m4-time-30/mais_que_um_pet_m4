@@ -1,26 +1,18 @@
-import updatePetsServices from "../../services/pets/updatePetsService";
+import updatePetsServices from "../../services/pets/updatePets.service";
 import { Request, Response } from "express";
-import {instanceToPlain} from "class-transformer"
+import tokenDecoder from "../../utilities/tokenDecoder.utility";
+import { IUpdatePet } from "../../interfaces/pet";
 
-export const  updatePetsControler = async (request: Request, response: Response) => {
-    
-    const {name ,size, pet_image, color, species, descripition, vaccine } =
-    request.body;
-  const { id } = request.params;
-  
-  const { info_pet_id } = request.body;
-  console.log(info_pet_id)
-  console.log(id)
-  const updatedPet = await updatePetsServices(
-    {name, size, pet_image, color, species, descripition, vaccine },
-    id,
-    info_pet_id
+export const updatePetsControler = async (req: Request, res: Response) => {
+  const body_req: IUpdatePet = req.validatedBody;
+  const user_token_id = tokenDecoder(req.headers.authorization!).user.id;
+  const { id: id_pet_update } = req.params;
+
+  const pet_update = await updatePetsServices(
+    body_req,
+    user_token_id,
+    id_pet_update
   );
-  return response.status(200).json({
-    message:"upadated", 
-    upadated: instanceToPlain( updatedPet)
 
-})
-   
+  return res.status(200).json({ pet_update, message: "Pet updated" });
 };
-

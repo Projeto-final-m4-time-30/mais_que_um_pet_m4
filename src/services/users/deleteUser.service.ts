@@ -14,15 +14,14 @@ const deleteUserService = async (id: string) => {
     throw new AppError("User not found.");
   }
 
-  if (user.is_active === false) {
-    throw new AppError("User not found.", 401)
-
+  if (!user.is_active) {
+    throw new AppError("User is not active.", 401);
   }
 
   await database.update(id, {
     is_active: false,
   });
 
-  return { statusCode: 204, message: "User deleted." };
+  return "user deleted";
 };
 export default deleteUserService;

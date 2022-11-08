@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-export const createUserSerializer =
+export const validateSerializer =
   (schema: any) => async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
