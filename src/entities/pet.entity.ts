@@ -32,6 +32,9 @@ export class Pet {
   @UpdateDateColumn()
   updated_at: Date;
 
+  @Column()
+  user_register: string;
+
   @OneToOne(() => Info_pet, { eager: true })
   @JoinColumn()
   info_pet: Info_pet;
