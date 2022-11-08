@@ -75,6 +75,7 @@
     - [`/pet`](#pet-4)
     - [Exemplo de Request:](#exemplo-de-request-9)
     - [Corpo da Requisição:](#corpo-da-requisição-9)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
     - [Exemplo de Response:](#exemplo-de-response-9)
     - [Possíveis Erros:](#possíveis-erros-9)
     - [2.6. **SoftDelete do pet**](#26-softdelete-do-pet)
@@ -246,7 +247,7 @@ Content-type: application/json
 ### Schema de Validação com Yup:
 
 ```javascript
-user_name: yup.string().required(),
+  user_name: yup.string().required(),
   user_image: yup
     .string()
     .notRequired()
@@ -841,8 +842,7 @@ Vazio
 ### `/pet`
 
 ```
-Pode ser atualizado o name, size, pet_image, color, species, description e vaccine.
-Deve ser passado o id do info_pet no body da requisição.
+Pode ser atualizado o name, size, pet_image, description e vaccine.
 ```
 
 ### Exemplo de Request:
@@ -858,16 +858,25 @@ Content-type: application/json
 
 ```json
 {
-  "name": "novo_nome",
+  "name": "Coragem",
   "size": "pequeno_porte",
   "pet_image": "nova_url",
-  "color": "preto",
-  "species": "Pastor Alemão",
   "description": "nova descrição",
-  "vaccine": "valmec",
-  "info_pet_id": "uuid info_pet"
+  "vaccine": "valmec"
 }
 ```
+
+### Schema de Validação com Yup:
+
+```javascript
+  name: yup.string().notRequired(),
+  description: yup.string().notRequired(),
+  pet_image: yup.string().notRequired(),
+  size: yup.string().notRequired(),
+  vaccine: yup.string().notRequired(),
+```
+
+OBS.: Chaves não presentes no schema serão removidas.
 
 ### Exemplo de Response:
 
@@ -877,22 +886,22 @@ Content-type: application/json
 
 ```json
 {
-  "message": "upadated",
-  "upadated": {
-    "id": "d2b3984b-1e98-4d5b-9075-36e3c57f4c0a",
-    "name": "novo_nome",
+  "message": "Pet updated",
+  "pet_update": {
+    "id": "f9814fb6-1afe-467f-a5df-758f199c1c3b",
+    "name": "Coragem",
     "is_adoptable": true,
     "is_active": true,
-    "created_at": "2022-11-07T19:58:33.299Z",
-    "updated_at": "2022-11-07T20:00:48.705Z",
-    "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
+    "created_at": "2022-11-08T04:20:13.494Z",
+    "updated_at": "2022-11-08T04:22:25.493Z",
+    "user_register": "be9c4637-651f-4d1d-aab4-c11258bb741d",
     "info_pet": {
-      "id": "867d6d92-4a26-46d7-a922-9aad0be31c7f",
+      "id": "6e6adf7a-3d81-48e8-8f3e-9244f473b47e",
       "pet_image": "nova_url",
       "size": "pequeno_porte",
-      "color": "preto",
-      "species": "Pastor Alemão",
-      "description": "Cadelinha de 7 anos muito tranquila e parceira",
+      "color": "Caramelo universal",
+      "species": "Vira-Lata",
+      "description": "nova descrição",
       "vaccine": "valmec"
     }
   }
@@ -901,12 +910,13 @@ Content-type: application/json
 
 ### Possíveis Erros:
 
-| Código do Erro  | Descrição                    |
-| --------------- | ---------------------------- |
-| 400 Bad request | missing authorization token. |
-| 403 forbidden   | Invalid token.               |
-| 404 not found   | Pet not find.                |
-| 404 not found   | infoPets not find            |
+| Código do Erro   | Descrição                    |
+| ---------------- | ---------------------------- |
+| 400 Bad request  | missing authorization token. |
+| 403 forbidden    | Invalid token.               |
+| 404 not found    | Pet not found.               |
+| 401 Unauthorized | Unauthorized.                |
+| 404 not found    | infoPets not found           |
 
 ---
 
@@ -936,7 +946,7 @@ Vazio
 ### Exemplo de Response:
 
 ```
-200 OK
+204 OK
 ```
 
 ```json
@@ -951,6 +961,6 @@ Vazio
 | --------------- | ----------------------------- |
 | 400 Bad request | missing authorization token.. |
 | 403 forbidden   | Invalid token.                |
-| 404 not found   | Pet not find.                 |
+| 404 not found   | Pet not found.                |
 
 ---

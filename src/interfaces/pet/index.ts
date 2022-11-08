@@ -27,9 +27,6 @@ export interface IUpdatePet {
   name?: string;
   size?: string;
   pet_image?: string;
-  color?: string;
-  especie?: string;
-  descripition?: string;
+  description?: string;
   vaccine?: string;
-  species?: string;
 }
