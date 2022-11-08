@@ -25,6 +25,7 @@ export const userRoutes = () => {
 
   routes.post("/login", loginUserController);
   routes.get("/users", userListController);
+
   routes.get(
     "/user",
     verifyUserAuthenticationMiddleware,
