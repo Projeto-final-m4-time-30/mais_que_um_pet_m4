@@ -5,6 +5,7 @@ import tokenDecoder from "../../utilities/tokenDecoder.utility";
 
 const listUserByIdController = async (req: Request, res: Response) => {
   const token = req.headers.authorization;
+
   const id = tokenDecoder(token!).user.id;
 
   const user = await listUserByIdService(id);
