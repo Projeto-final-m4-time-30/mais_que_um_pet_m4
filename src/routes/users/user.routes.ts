@@ -6,14 +6,14 @@ import { loginUserController } from "../../controllers/users/loginUser.controlle
 import { updateUserController } from "../../controllers/users/updateUser.controller";
 import verifyUserAuthenticationMiddleware from "../../middlewares/verifyUserAuthentication.middleware";
 import { userCreateScheama } from "../../schemas";
-import { createUserSerializer } from "../../serializers/createUser.serializer";
+import { validateSerializer } from "../../serializers/validate.serializer";
 
 const routes = Router();
 
 export const userRoutes = () => {
   routes.post(
     "/users",
-    createUserSerializer(userCreateScheama),
+    validateSerializer(userCreateScheama),
     createUserController
   );
   routes.patch(

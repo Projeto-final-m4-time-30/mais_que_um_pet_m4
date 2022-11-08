@@ -3,7 +3,7 @@ import { SchemaOf } from "yup";
 
 import bcrypt from "bcrypt";
 import { IUser } from "../interfaces/user";
-
+import { IUpdatePet } from "../interfaces/pet";
 
 export const userCreateScheama: SchemaOf<IUser> = yup.object().shape({
   user_name: yup.string().required(),
@@ -49,4 +49,12 @@ export const userCreateScheama: SchemaOf<IUser> = yup.object().shape({
       .notRequired()
       .default(() => ""),
   }),
+});
+
+export const petUpdateSchema: SchemaOf<IUpdatePet> = yup.object().shape({
+  name: yup.string().notRequired(),
+  description: yup.string().notRequired(),
+  pet_image: yup.string().notRequired(),
+  size: yup.string().notRequired(),
+  vaccine: yup.string().notRequired(),
 });

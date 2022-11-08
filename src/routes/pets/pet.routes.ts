@@ -6,6 +6,8 @@ import { readAdoptablePetsController } from "../../controllers/pets/readAdoptabl
 import { readAllPetsController } from "../../controllers/pets/readAllPets.controllers";
 import { updatePetsControler } from "../../controllers/pets/updatePetsControler";
 import verifyUserAuthenticationMiddleware from "../../middlewares/verifyUserAuthentication.middleware";
+import { petUpdateSchema } from "../../schemas";
+import { validateSerializer } from "../../serializers/validate.serializer";
 
 const routes = Router();
 
@@ -18,8 +20,17 @@ export const petRoutes = () => {
     verifyUserAuthenticationMiddleware,
     adoptPetController
   );
-  routes.patch('/pet/:id', verifyUserAuthenticationMiddleware, updatePetsControler)
-  routes.delete('/pet/:id', verifyUserAuthenticationMiddleware, deletePetControler)
+  routes.patch(
+    "/pet/:id",
+    verifyUserAuthenticationMiddleware,
+    validateSerializer(petUpdateSchema),
+    updatePetsControler
+  );
+  routes.delete(
+    "/pet/:id",
+    verifyUserAuthenticationMiddleware,
+    deletePetControler
+  );
 
   return routes;
 };
