@@ -17,7 +17,6 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.10",
     "uuid": "^9.0.0",
-    "win-node-env": "^0.6.1",
     "yup": "^0.32.11"
   },
   "scripts": {
