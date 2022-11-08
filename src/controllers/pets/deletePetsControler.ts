@@ -6,6 +6,6 @@ export const deletePetControler = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const deletePet = await deletePetsService(id);
-  console.log(deletePet);
-  return res.status(200).json({ message: "pet Deleted" });
+
+  return res.status(204).json({ message: "pet Deleted" });
 };

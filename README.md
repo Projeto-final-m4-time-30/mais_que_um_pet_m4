@@ -75,6 +75,7 @@
     - [`/pet`](#pet-4)
     - [Exemplo de Request:](#exemplo-de-request-9)
     - [Corpo da Requisição:](#corpo-da-requisição-9)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
     - [Exemplo de Response:](#exemplo-de-response-9)
     - [Possíveis Erros:](#possíveis-erros-9)
     - [2.6. **SoftDelete do pet**](#26-softdelete-do-pet)
@@ -246,7 +247,7 @@ Content-type: application/json
 ### Schema de Validação com Yup:
 
 ```javascript
-user_name: yup.string().required(),
+  user_name: yup.string().required(),
   user_image: yup
     .string()
     .notRequired()
@@ -841,8 +842,7 @@ Vazio
 ### `/pet`
 
 ```
-Pode ser atualizado o name, size, pet_image, color, species, description e vaccine.
-Deve ser passado o id do info_pet no body da requisição.
+Pode ser atualizado o name, size, pet_image, description e vaccine.
 ```
 
 ### Exemplo de Request:
@@ -865,6 +865,18 @@ Content-type: application/json
   "vaccine": "valmec"
 }
 ```
+
+### Schema de Validação com Yup:
+
+```javascript
+  name: yup.string().notRequired(),
+  description: yup.string().notRequired(),
+  pet_image: yup.string().notRequired(),
+  size: yup.string().notRequired(),
+  vaccine: yup.string().notRequired(),
+```
+
+OBS.: Chaves não presentes no schema serão removidas.
 
 ### Exemplo de Response:
 
@@ -934,7 +946,7 @@ Vazio
 ### Exemplo de Response:
 
 ```
-200 OK
+204 OK
 ```
 
 ```json
@@ -949,6 +961,6 @@ Vazio
 | --------------- | ----------------------------- |
 | 400 Bad request | missing authorization token.. |
 | 403 forbidden   | Invalid token.                |
-| 404 not found   | Pet not find.                 |
+| 404 not found   | Pet not found.                |
 
 ---
