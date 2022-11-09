@@ -57,4 +57,5 @@ export const petUpdateSchema: SchemaOf<IUpdatePet> = yup.object().shape({
   pet_image: yup.string().notRequired(),
   size: yup.string().notRequired(),
   vaccine: yup.string().notRequired(),
+  age: yup.string().notRequired(),
 });
