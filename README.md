@@ -875,6 +875,10 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 ### Exemplo de Request:
 
 ```
+Deve ser passado o id do pet na url da requisição
+```
+
+```
 PATCH /pet/adopt/:id
 Host: https://mais-que-um-pet.herokuapp.com
 Authorization: Bearer token
@@ -884,7 +888,9 @@ Content-type: application/json
 ### Corpo da Requisição:
 
 ```json
-Vazio
+{
+  "email": "emaildodonatario@mail.com"
+}
 ```
 
 ### Exemplo de Response:
@@ -924,7 +930,7 @@ Vazio
 ### `/pet`
 
 ```
-Pode ser atualizado o name, size, pet_image, description e vaccine.
+Pode ser atualizado o name, size, pet_image, description e vaccine, age.
 ```
 
 ### Exemplo de Request:
