@@ -26,6 +26,12 @@ export class Pet {
   @Column()
   is_active: boolean;
 
+  @Column()
+  age: string;
+
+  @Column()
+  gender: string;
+
   @CreateDateColumn()
   created_at: Date;
 

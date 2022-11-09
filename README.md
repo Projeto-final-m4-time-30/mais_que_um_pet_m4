@@ -33,57 +33,63 @@
     - [Corpo da Requisição:](#corpo-da-requisição-2)
     - [Exemplo de Response:](#exemplo-de-response-2)
     - [Possíveis Erros:](#possíveis-erros-2)
-    - [1.4. **Atualização do usuário**](#14-atualização-do-usuário)
-    - [`/users`](#users-2)
+    - [1.4. **Listando Usuário**](#14-listando-usuário)
+    - [`/user`](#user)
     - [Exemplo de Request:](#exemplo-de-request-3)
     - [Corpo da Requisição:](#corpo-da-requisição-3)
     - [Exemplo de Response:](#exemplo-de-response-3)
     - [Possíveis Erros:](#possíveis-erros-3)
-    - [1.5. **SoftDelete do usuário**](#15-softdelete-do-usuário)
-    - [`/users`](#users-3)
+    - [1.4. **Atualização do usuário**](#14-atualização-do-usuário)
+    - [`/users`](#users-2)
     - [Exemplo de Request:](#exemplo-de-request-4)
     - [Corpo da Requisição:](#corpo-da-requisição-4)
     - [Exemplo de Response:](#exemplo-de-response-4)
     - [Possíveis Erros:](#possíveis-erros-4)
-  - [2. **Pets**](#2-pets)
-    - [Endpoints](#endpoints-1)
-    - [2.1. **Criação de um pet**](#21-criação-de-um-pet)
-    - [`/pet`](#pet)
+    - [1.5. **SoftDelete do usuário**](#15-softdelete-do-usuário)
+    - [`/users`](#users-3)
     - [Exemplo de Request:](#exemplo-de-request-5)
     - [Corpo da Requisição:](#corpo-da-requisição-5)
     - [Exemplo de Response:](#exemplo-de-response-5)
     - [Possíveis Erros:](#possíveis-erros-5)
-    - [2.2. **Listar todos os pets**](#22-listar-todos-os-pets)
-    - [`/pet`](#pet-1)
+  - [2. **Pets**](#2-pets)
+    - [Endpoints](#endpoints-1)
+    - [2.1. **Criação de um pet**](#21-criação-de-um-pet)
+    - [`/pet`](#pet)
     - [Exemplo de Request:](#exemplo-de-request-6)
     - [Corpo da Requisição:](#corpo-da-requisição-6)
     - [Exemplo de Response:](#exemplo-de-response-6)
     - [Possíveis Erros:](#possíveis-erros-6)
-    - [2.3. **Lista os pets disponíveis para adoção**](#23-lista-os-pets-disponíveis-para-adoção)
-    - [`/pet`](#pet-2)
+    - [2.2. **Listar todos os pets**](#22-listar-todos-os-pets)
+    - [`/pet`](#pet-1)
     - [Exemplo de Request:](#exemplo-de-request-7)
     - [Corpo da Requisição:](#corpo-da-requisição-7)
     - [Exemplo de Response:](#exemplo-de-response-7)
     - [Possíveis Erros:](#possíveis-erros-7)
-    - [2.4. **Adotar um pet**](#24-adotar-um-pet)
-    - [`/pet`](#pet-3)
+    - [2.3. **Lista os pets disponíveis para adoção**](#23-lista-os-pets-disponíveis-para-adoção)
+    - [`/pet`](#pet-2)
     - [Exemplo de Request:](#exemplo-de-request-8)
     - [Corpo da Requisição:](#corpo-da-requisição-8)
     - [Exemplo de Response:](#exemplo-de-response-8)
     - [Possíveis Erros:](#possíveis-erros-8)
-    - [2.5. **Atualizar dados do pet**](#25-atualizar-dados-do-pet)
-    - [`/pet`](#pet-4)
+    - [2.4. **Adotar um pet**](#24-adotar-um-pet)
+    - [`/pet`](#pet-3)
     - [Exemplo de Request:](#exemplo-de-request-9)
     - [Corpo da Requisição:](#corpo-da-requisição-9)
-    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
     - [Exemplo de Response:](#exemplo-de-response-9)
     - [Possíveis Erros:](#possíveis-erros-9)
-    - [2.6. **SoftDelete do pet**](#26-softdelete-do-pet)
-    - [`/pet`](#pet-5)
+    - [2.5. **Atualizar dados do pet**](#25-atualizar-dados-do-pet)
+    - [`/pet`](#pet-4)
     - [Exemplo de Request:](#exemplo-de-request-10)
     - [Corpo da Requisição:](#corpo-da-requisição-10)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
     - [Exemplo de Response:](#exemplo-de-response-10)
     - [Possíveis Erros:](#possíveis-erros-10)
+    - [2.6. **SoftDelete do pet**](#26-softdelete-do-pet)
+    - [`/pet`](#pet-5)
+    - [Exemplo de Request:](#exemplo-de-request-11)
+    - [Corpo da Requisição:](#corpo-da-requisição-11)
+    - [Exemplo de Response:](#exemplo-de-response-11)
+    - [Possíveis Erros:](#possíveis-erros-11)
 
 ---
 
@@ -109,7 +115,7 @@ https://mais-que-um-pet.herokuapp.com
 
 Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
 
-![DER](diagrama_atualizado.jpeg)
+![DER](relacao-de-entidades.jpeg)
 
 ---
 
@@ -200,6 +206,7 @@ O objeto User é definido como:
 | POST   | /users     | Criação de um usuário.    |
 | POST   | /login     | Login do usuário.         |
 | GET    | /users     | Lista todos os usuários   |
+| GET    | /user      | Lista um usuário          |
 | PATCH  | /users/:id | Atualiza dados do usuário |
 | DELETE | /users/:id | SoftDelete do usuário     |
 
@@ -224,9 +231,9 @@ Content-type: application/json
 
 ```json
 {
-  "user_name": "Makson",
+  "user_name": "adm",
   "user_image": "url_image",
-  "email": "makson@mail.com",
+  "email": "adm@mail.com",
   "password": "1234",
   "address": {
     "cep": "12345678",
@@ -238,7 +245,7 @@ Content-type: application/json
   "contact": {
     "description": "",
     "phone": "81991919191",
-    "secondary_email": "makson2@mail.com",
+    "secondary_email": "adm2@mail.com",
     "whatsapp": "81993939393"
   }
 }
@@ -302,9 +309,9 @@ OBS.: Chaves não presentes no schema serão removidas.
 ```json
 {
   "id": "22f55f79-0a33-4af5-b7fb-f20e41c1ceed",
-  "user_name": "Makson",
-  "user_image": "jubfjsdbds",
-  "email": "azevedo@mail.com",
+  "user_name": "adm",
+  "user_image": "adm_image",
+  "email": "adm@mail.com",
   "is_active": true,
   "address": {
     "cep": "12345678",
@@ -317,7 +324,7 @@ OBS.: Chaves não presentes no schema serão removidas.
   "contact": {
     "description": "uma breve descrição",
     "phone": "81991919191",
-    "secondary_email": "makson2@mail.com",
+    "secondary_email": "adm2@mail.com",
     "whatsapp": "81993939393",
     "id": "8a3cfb25-3f75-4534-8d8f-cc736aa9a690"
   },
@@ -352,7 +359,7 @@ Content-type: application/json
 
 ```json
 {
-  "email": "makson@mail.com",
+  "email": "adm@mail.com",
   "password": "1234"
 }
 ```
@@ -413,9 +420,9 @@ Vazio
 [
   {
     "id": "22f55f79-0a33-4af5-b7fb-f20e41c1ceed",
-    "user_name": "Makson",
+    "user_name": "adm",
     "user_image": "jubfjsdbds",
-    "email": "azevedo@mail.com",
+    "email": "adm@mail.com",
     "is_active": true,
     "address": {
       "cep": "12345678",
@@ -428,7 +435,7 @@ Vazio
     "contact": {
       "description": "uma breve descrição",
       "phone": "81991919191",
-      "secondary_email": "makson2@mail.com",
+      "secondary_email": "adm2@mail.com",
       "whatsapp": "81993939393",
       "id": "8a3cfb25-3f75-4534-8d8f-cc736aa9a690"
     },
@@ -442,6 +449,71 @@ Vazio
 ### Possíveis Erros:
 
 Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+### 1.4. **Listando Usuário**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/user`
+
+### Exemplo de Request:
+
+```
+
+GET /user
+Host: https://mais-que-um-pet.herokuapp.com
+Authorization: Bearer token
+Content-type: application/json
+
+```
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "id": "22f55f79-0a33-4af5-b7fb-f20e41c1ceed",
+  "user_name": "Adm",
+  "user_image": "jubfjsdbds",
+  "email": "adm@mail.com",
+  "is_active": true,
+  "address": {
+    "cep": "12345678",
+    "city": "Recife",
+    "district": "Nova Decoberta",
+    "number": "10",
+    "state": "PE",
+    "id": "dd032196-339a-4a20-a7ee-8c5c72f17611"
+  },
+  "contact": {
+    "description": "uma breve descrição",
+    "phone": "81991919191",
+    "secondary_email": "adm2@mail.com",
+    "whatsapp": "81993939393",
+    "id": "8a3cfb25-3f75-4534-8d8f-cc736aa9a690"
+  },
+  "pets": [],
+  "created_at": "2022-11-04T16:13:46.493Z",
+  "updated_at": "2022-11-04T16:13:46.493Z"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not Found  | User not found. |
 
 ---
 
@@ -470,9 +542,9 @@ Content-type: application/json
 
 ```json
 {
-  "user_name": "João",
+  "user_name": "adm",
   "user_image": "url_da_imagem",
-  "email": "joao@mail.com",
+  "email": "adm@mail.com",
   "password": "12345"
 }
 ```
@@ -489,8 +561,8 @@ Content-type: application/json
   "updatedUser": {
     "id": "22f55f79-0a33-4af5-b7fb-f20e41c1ceed",
     "user_image": "url_da_imagem",
-    "user_name": "João",
-    "email": "joao@mail.com",
+    "user_name": "adm",
+    "email": "adm@mail.com",
     "password": "$2b$10$3dmTSKOWBQp4zPp./VmQ7uKVsuWvlhFTQTkPJLmloAvF64POC9gDu",
     "is_active": true,
     "created_at": "2022-11-04T16:13:46.493Z",
@@ -507,7 +579,7 @@ Content-type: application/json
     "contact": {
       "id": "8a3cfb25-3f75-4534-8d8f-cc736aa9a690",
       "phone": "81991919191",
-      "secondary_email": "makson2@mail.com",
+      "secondary_email": "adm2@mail.com",
       "whatsapp": "81993939393",
       "description": "uma breve descrição"
     }
@@ -814,7 +886,7 @@ Vazio
 ```json
 {
   "message": "Pet Adopted",
-  "user": "Makson",
+  "user": "adm",
   "pet": {
     "name": "Viola2",
     "is_adoptable": false
