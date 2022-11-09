@@ -5,6 +5,8 @@ export interface IPet {
   created_at: Date;
   updated_at: Date;
   info_pet: IInfoPet;
+  age: string;
+  gender: string;
 }
 
 export interface IInfoPet {
@@ -29,4 +31,5 @@ export interface IUpdatePet {
   pet_image?: string;
   description?: string;
   vaccine?: string;
+  age?: string;
 }
