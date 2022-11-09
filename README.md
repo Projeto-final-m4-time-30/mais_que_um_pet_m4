@@ -115,7 +115,7 @@ https://mais-que-um-pet.herokuapp.com
 
 Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
 
-![DER](relacao-de-entidades.jpeg)
+![DER](relacao-tabelas-ok.jpeg)
 
 ---
 
