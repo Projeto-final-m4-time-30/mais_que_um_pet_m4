@@ -39,13 +39,13 @@
     - [Corpo da Requisição:](#corpo-da-requisição-3)
     - [Exemplo de Response:](#exemplo-de-response-3)
     - [Possíveis Erros:](#possíveis-erros-3)
-    - [1.4. **Atualização do usuário**](#14-atualização-do-usuário)
+    - [1.5. **Atualização do usuário**](#15-atualização-do-usuário)
     - [`/users`](#users-2)
     - [Exemplo de Request:](#exemplo-de-request-4)
     - [Corpo da Requisição:](#corpo-da-requisição-4)
     - [Exemplo de Response:](#exemplo-de-response-4)
     - [Possíveis Erros:](#possíveis-erros-4)
-    - [1.5. **SoftDelete do usuário**](#15-softdelete-do-usuário)
+    - [1.6. **SoftDelete do usuário**](#16-softdelete-do-usuário)
     - [`/users`](#users-3)
     - [Exemplo de Request:](#exemplo-de-request-5)
     - [Corpo da Requisição:](#corpo-da-requisição-5)
@@ -517,7 +517,7 @@ Vazio
 
 ---
 
-### 1.4. **Atualização do usuário**
+### 1.5. **Atualização do usuário**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -599,7 +599,7 @@ Content-type: application/json
 
 ---
 
-### 1.5. **SoftDelete do usuário**
+### 1.6. **SoftDelete do usuário**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -656,6 +656,8 @@ O objeto User é definido como:
 | is_adoptable  | boolean  | Informa se o pet pode ser adotado       |
 | is_active     | Boolean  | Softdelete do pet                       |
 | created_at    | date     | Data de cadastro do pet                 |
+| age           | string   | Idade do pet.                           |
+| gender        | string   | Sexo do pet.                            |
 | updated_at    | date     | Data de atualização do pet              |
 | info_pet      | Info_pet | Objeto Info_pet, informações do pet     |
 | user          | User     | Objeto User, define usuário dono do pet |
@@ -696,6 +698,8 @@ Content-type: application/json
   "name": "Viola",
   "is_adoptable": true,
   "is_active": true,
+  "gender": "female",
+  "age": "5",
   "info_pet": {
     "pet_image": "",
     "size": "médio porte",
@@ -718,6 +722,8 @@ Content-type: application/json
   "name": "Viola2",
   "is_adoptable": true,
   "is_active": true,
+  "gender": "female",
+  "age": "5",
   "info_pet": {
     "pet_image": "viola2",
     "size": "médio porte",
@@ -778,6 +784,8 @@ Vazio
     "name": "Viola",
     "is_adoptable": false,
     "is_active": true,
+    "gender": "female",
+    "age": "5",
     "created_at": "2022-11-07T16:04:00.405Z",
     "updated_at": "2022-11-07T16:13:08.903Z",
     "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
@@ -834,6 +842,8 @@ Vazio
     "name": "Viola2",
     "is_adoptable": true,
     "is_active": true,
+    "gender": "female",
+    "age": "5",
     "created_at": "2022-11-07T19:20:48.930Z",
     "updated_at": "2022-11-07T19:20:48.930Z",
     "user_register": "96a10907-638b-42d8-a4eb-22dba8b22813",
@@ -934,7 +944,8 @@ Content-type: application/json
   "size": "pequeno_porte",
   "pet_image": "nova_url",
   "description": "nova descrição",
-  "vaccine": "valmec"
+  "vaccine": "valmec",
+  "age": "5"
 }
 ```
 
@@ -946,6 +957,7 @@ Content-type: application/json
   pet_image: yup.string().notRequired(),
   size: yup.string().notRequired(),
   vaccine: yup.string().notRequired(),
+  age: yup.string().notRequired()
 ```
 
 OBS.: Chaves não presentes no schema serão removidas.
@@ -964,6 +976,8 @@ OBS.: Chaves não presentes no schema serão removidas.
     "name": "Coragem",
     "is_adoptable": true,
     "is_active": true,
+    "gender": "female",
+    "age": "5",
     "created_at": "2022-11-08T04:20:13.494Z",
     "updated_at": "2022-11-08T04:22:25.493Z",
     "user_register": "be9c4637-651f-4d1d-aab4-c11258bb741d",

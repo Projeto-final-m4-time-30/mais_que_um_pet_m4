@@ -5,7 +5,7 @@ import { Info_pet } from "../../entities/info_pet.entity";
 import { AppError } from "../../errors/appError";
 
 const updatePetsServices = async (
-  { description, name, pet_image, size, vaccine }: IUpdatePet,
+  { description, name, pet_image, size, vaccine, age }: IUpdatePet,
   user_token_id: string,
   id_pet_update: string
 ) => {
@@ -34,6 +34,7 @@ const updatePetsServices = async (
 
   await petsRepository.update(id_pet_update, {
     name: name ? name : findPet!.name,
+    age: age ? age : findPet!.age,
   });
 
   await infoRepository.update(id_info_pet, {

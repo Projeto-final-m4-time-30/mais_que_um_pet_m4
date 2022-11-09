@@ -5,7 +5,7 @@ import { AppError } from "../../errors/appError";
 import { IPet } from "../../interfaces/pet";
 
 export const createPetService = async (
-  { name, is_adoptable, info_pet }: IPet,
+  { name, is_adoptable, info_pet, gender, age }: IPet,
   id: any
 ) => {
   const petRepository = AppDataSource.getRepository(Pet);
@@ -37,6 +37,8 @@ export const createPetService = async (
   newPet.is_active = true;
   newPet.info_pet = newInfo_Pet;
   newPet.user_register = id;
+  newPet.age = age;
+  newPet.gender = gender;
 
   petRepository.create(newPet);
   await petRepository.save(newPet);
