@@ -1,5 +1,5 @@
 import { hash } from "bcrypt";
-import AppDataSource from "../../database/data-source";
+import AppDataSource from "../../data-source";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 import { IUserUpdate } from "../../interfaces/user";

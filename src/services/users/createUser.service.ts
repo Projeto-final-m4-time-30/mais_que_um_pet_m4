@@ -1,4 +1,4 @@
-import AppDataSource from "../../database/data-source";
+import AppDataSource from "../../data-source";
 import { Address } from "../../entities/address.entity";
 import { Contact } from "../../entities/contact.entity";
 import { User } from "../../entities/user.entity";

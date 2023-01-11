@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import AppDataSource from "../../../database/data-source";
+import AppDataSource from "../../../data-source";
 import request from "supertest";
 import app from "../../../app";
 import { createPet, pets, user, users, userSession } from "../../mocks";

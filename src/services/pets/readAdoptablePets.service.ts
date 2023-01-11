@@ -1,4 +1,4 @@
-import AppDataSource from "../../database/data-source";
+import AppDataSource from "../../data-source";
 import { Pet } from "../../entities/pet.entity";
 import { IPet } from "../../interfaces/pet";
 
